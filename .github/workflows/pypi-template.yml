@@ -5,14 +5,14 @@ on:
   workflow_dispatch:
 jobs:
   build-image:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       FLIT_USERNAME: ${{ secrets.PYPI_USER }}
       FLIT_PASSWORD: ${{ secrets.PYPI_PASS }}
     steps:
       - uses: actions/checkout@v3
-      - name: start build
+      - name: start publish
         run: |
           pip3 install --user flit
           pip3 install --user py_dev_support
-          ./scripts/build.sh
+          ./scripts/publish.sh
