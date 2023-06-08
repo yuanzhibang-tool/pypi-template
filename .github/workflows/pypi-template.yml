@@ -9,10 +9,14 @@ jobs:
     env:
       FLIT_USERNAME: ${{ secrets.PYPI_USER }}
       FLIT_PASSWORD: ${{ secrets.PYPI_PASS }}
+      GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+      GIT_USER: ${{ secrets.GIT_USER }}
     steps:
       - uses: actions/checkout@v3
       - name: start publish
         run: |
+          git config --global user.email $GIT_EMAIL
+          git config --global user.user $GIT_USER
           pip3 install --user flit
           pip3 install --user py_dev_support
           ./scripts/publish.sh
