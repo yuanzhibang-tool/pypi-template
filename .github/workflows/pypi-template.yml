@@ -1,0 +1,16 @@
+name: pypi-template
+on:
+  push:
+    branches: ['pypi-template']
+  workflow_dispatch:
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    env:
+      PY_USER: ${{ secrets.PYPI_USER }}
+      PYPI_PASS: ${{ secrets.PYPI_PASS }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: start build
+        run: |
+          ./scripts/build.sh
